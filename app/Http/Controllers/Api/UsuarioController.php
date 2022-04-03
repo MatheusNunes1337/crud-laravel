@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
+
+    private $usuario;
+
+    public function __construct(Usuario $usuario)
+    {
+        $this->usuario = $usuario;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        return Usuario::all();
     }
 
     /**
@@ -26,7 +33,17 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            return response()->json([
+                "Message"=>"Usuário criado com sucesso!",
+                "Usuario"=>$this->usuario->create($request->post())
+            ]);
+        }catch(Exception $error){
+            return response()->json([
+                "Erro"=>"Não foi possível criar novo Usuário!",
+                "Exception"=>$error->getMessage()
+            ]);
+        }
     }
 
     /**
@@ -37,7 +54,7 @@ class UsuarioController extends Controller
      */
     public function show(Usuario $usuario)
     {
-        //
+        return $usuario;
     }
 
     /**
@@ -49,7 +66,18 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, Usuario $usuario)
     {
-        //
+        try{
+            $usuario->update($request->all());
+            return response()->json([
+                "Message"=>"Usuário atualizado com sucesso!",
+                "Usuário"=>$usuario
+            ]);
+        }catch(Exception $error){
+            return response()->json([
+                "Erro"=>"Não foi possível atualizar o Usuário!",
+                "Exception"=>$error->getMessage()
+            ]);
+        }
     }
 
     /**
@@ -60,6 +88,23 @@ class UsuarioController extends Controller
      */
     public function destroy(Usuario $usuario)
     {
-        //
+        try{
+            if($usuario->delete())
+                return response()->json([
+                    "Messge"=>"Usuário removido !",
+                    "Usuario"=>$usuario
+                ]);
+            throw new Exception("Erro ao deletar Usuario!");
+        }catch(Exception $error){
+            return response()->json([
+                "Erro"=>"Não foi possível remover o Usuario!",
+                "Exception"=>$error->getMessage()
+            ]);
+        }
+    }
+
+    public function listPostagens(Usuario $usuario)
+    {
+        return response()->json($usuario->load('postagens'));
     }
 }

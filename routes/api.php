@@ -24,3 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('usuarios', UsuarioController::class);
 Route::apiResource('grupos', GrupoController::class);
 Route::apiResource('postagens', PostagemController::class);
+
+Route::get('usuarios/{usuario}/postagens', [UsuarioController::class, 'listPostagens'])
+        ->name('usuarios.postagens');
+
+Route::get('grupos/{grupo}/postagens', [GrupoController::class, 'listPostagens'])
+        ->name('grupo.postagens');

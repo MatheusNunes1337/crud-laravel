@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class PostagemController extends Controller
 {
+    private $postagem;
+
+    public function __construct(Postagem $postagem)
+    {
+        $this->postagem = $postagem;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,7 @@ class PostagemController extends Controller
      */
     public function index()
     {
-        //
+        return Postagem::all();
     }
 
     /**
@@ -26,7 +32,17 @@ class PostagemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            return response()->json([
+                "Message"=>"Postagem criada com sucesso!",
+                "Postagem"=>$this->postagem->create($request->post())
+            ]);
+        }catch(Exception $error){
+            return response()->json([
+                "Erro"=>"Não foi possível criar uma nova Postagem!",
+                "Exception"=>$error->getMessage()
+            ]);
+        }
     }
 
     /**
@@ -37,7 +53,7 @@ class PostagemController extends Controller
      */
     public function show(Postagem $postagem)
     {
-        //
+        return $postagem;
     }
 
     /**
@@ -49,7 +65,18 @@ class PostagemController extends Controller
      */
     public function update(Request $request, Postagem $postagem)
     {
-        //
+        try{
+            $postagem->update($request->all());
+            return response()->json([
+                "Message"=>"Postagem atualizada com sucesso!",
+                "Postagem"=>$postagem
+            ]);
+        }catch(Exception $error){
+            return response()->json([
+                "Erro"=>"Não foi possível atualizar a Postagem!",
+                "Exception"=>$error->getMessage()
+            ]);
+        }
     }
 
     /**
@@ -60,6 +87,18 @@ class PostagemController extends Controller
      */
     public function destroy(Postagem $postagem)
     {
-        //
+        try{
+            if($postagem->delete())
+                return response()->json([
+                    "Messge"=>"Postagem removida!!!",
+                    "postagem"=>$postagem
+                ]);
+            throw new Exception("Erro ao deletar Postagem!");
+        }catch(Exception $error){
+            return response()->json([
+                "Erro"=>"Não foi possível remover a Postagem!",
+                "Exception"=>$error->getMessage()
+            ]);
+        }
     }
 }
