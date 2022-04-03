@@ -19,9 +19,14 @@ class PostagemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Postagem::all();
+        $perPage = $request->query('per_page');
+        $postagensPaginated = Postagem::paginate($perPage);
+        $postagensPaginated->appends([
+            'per_page'=>$perPage
+        ]);
+        return response()->json($postagensPaginated);
     }
 
     /**

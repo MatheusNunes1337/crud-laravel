@@ -20,9 +20,14 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Usuario::all();
+        $perPage = $request->query('per_page');
+        $usuariosPaginated = Usuario::paginate($perPage);
+        $usuariosPaginated->appends([
+            'per_page'=>$perPage
+        ]);
+        return response()->json($usuariosPaginated);
     }
 
     /**

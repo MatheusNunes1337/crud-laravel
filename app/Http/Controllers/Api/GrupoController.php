@@ -19,9 +19,14 @@ class GrupoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Grupo::all();
+        $perPage = $request->query('per_page');
+        $gruposPaginated = Grupo::paginate($perPage);
+        $gruposPaginated->appends([
+            'per_page'=>$perPage
+        ]);
+        return response()->json($gruposPaginated);
     }
 
     /**
@@ -100,5 +105,10 @@ class GrupoController extends Controller
                 "Exception"=>$error->getMessage()
             ]);
         }
+    }
+
+    public function listPostagens(Grupo $grupo)
+    {
+        return response()->json($grupo->load('postagems'));
     }
 }
