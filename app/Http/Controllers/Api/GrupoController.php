@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GrupoRequest;
 use App\Models\Grupo;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,7 @@ class GrupoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GrupoRequest $request)
     {
         try{
             return response()->json([
@@ -68,7 +69,7 @@ class GrupoController extends Controller
      * @param  \App\Models\Grupo  $grupo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Grupo $grupo)
+    public function update(GrupoRequest $request, Grupo $grupo)
     {
         try{
             $grupo->update($request->all());

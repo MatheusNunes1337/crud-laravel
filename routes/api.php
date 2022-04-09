@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\UsuarioController;
 use App\Http\Controllers\Api\GrupoController;
 use App\Http\Controllers\Api\PostagemController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('usuarios', UsuarioController::class);
 Route::apiResource('grupos', GrupoController::class);
 Route::apiResource('postagens', PostagemController::class);
+Route::apiResource('users', UserController::class);
+
 
 Route::get('usuarios/{usuario}/postagens', [UsuarioController::class, 'listPostagens'])
         ->name('usuarios.postagens');

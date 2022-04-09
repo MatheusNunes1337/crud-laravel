@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Postagem;
+use App\Http\Requests\PostagemRequest;
 use Illuminate\Http\Request;
 
 class PostagemController extends Controller
@@ -35,7 +36,7 @@ class PostagemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostagemRequest $request)
     {
         try{
             return response()->json([
@@ -68,7 +69,7 @@ class PostagemController extends Controller
      * @param  \App\Models\Postagem  $postagem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Postagem $postagem)
+    public function update(PostagemRequest $request, Postagem $postagem)
     {
         try{
             $postagem->update($request->all());
