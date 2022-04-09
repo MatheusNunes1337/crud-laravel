@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\UsuarioController;
 use App\Http\Controllers\Api\GrupoController;
 use App\Http\Controllers\Api\PostagemController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::apiResource('grupos', GrupoController::class);
 Route::apiResource('postagens', PostagemController::class);
 Route::apiResource('users', UserController::class);
 
+Route::post('login', [LoginController::class, 'login'])->name('login');
 
 Route::get('usuarios/{usuario}/postagens', [UsuarioController::class, 'listPostagens'])
         ->name('usuarios.postagens');

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
+use Exception;
 
 class UserController extends Controller
 {
