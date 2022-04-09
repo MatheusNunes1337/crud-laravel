@@ -31,7 +31,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $status = 200;
+        try{
+            $newUser = $request->post();
+            if(!$newUser){
+                $status = 400;
+                throw new Exception('Os dados necessitam ser enviados através do método POST');
+            }
+            $newUser['password'] = password_hash(
+                $newUser['password'],
+                PASSWORD_DEFAULT);
+            $response = [
+                'mensagem'=>'User criado com sucesso!!',
+                'user'=>User::create($newUser)
+            ];
+        }catch(Exception $error){
+            $status = isset($error->errorInfo)? 500: $status;
+            $response = [
+                'error'=>isset($error->errorInfo) ?
+                    'Internal server error'
+                    :$error->getMessage()
+          ];
+        }
+        return response()->json($response, $status);
     }
 
     /**
