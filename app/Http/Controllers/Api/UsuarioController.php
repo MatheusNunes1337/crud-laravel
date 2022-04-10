@@ -70,7 +70,7 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(UsuarioRequest $request, Usuario $usuario)
+    public function update(Request $request, Usuario $usuario)
     {
         try{
             $usuario->update($request->all());

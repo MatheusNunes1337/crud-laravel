@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Postagem;
 use App\Http\Requests\PostagemRequest;
 use Illuminate\Http\Request;
+use Exception;
 
 class PostagemController extends Controller
 {
@@ -36,9 +37,12 @@ class PostagemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostagemRequest $request)
+    public function store(Request $request)
     {
         try{
+            if(!$request->user()->tokenCan('is_admin')) {
+                throw new Exception('Você não está autorizado a criar um grupo');
+            }
             return response()->json([
                 "Message"=>"Postagem criada com sucesso!",
                 "Postagem"=>$this->postagem->create($request->post())
@@ -69,9 +73,12 @@ class PostagemController extends Controller
      * @param  \App\Models\Postagem  $postagem
      * @return \Illuminate\Http\Response
      */
-    public function update(PostagemRequest $request, Postagem $postagem)
+    public function update(Request $request, Postagem $postagem)
     {
         try{
+            if(!$request->user()->tokenCan('is_admin')) {
+                throw new Exception('Você não está autorizado a criar um grupo');
+            }
             $postagem->update($request->all());
             return response()->json([
                 "Message"=>"Postagem atualizada com sucesso!",

@@ -23,12 +23,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('usuarios', UsuarioController::class);
-Route::apiResource('grupos', GrupoController::class);
-Route::apiResource('postagens', PostagemController::class);
-Route::apiResource('users', UserController::class);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::apiResource('usuarios', UsuarioController::class);
+    Route::apiResource('grupos', GrupoController::class);
+    Route::apiResource('postagens', PostagemController::class);
+    Route::post('grupos', [GrupoController::class, 'store'])->middleware(['ability:is-admin']);
+    Route::put('grupos/{id}', [GrupoController::class, 'update'])->middleware(['ability:is-admin']);
+    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+});
 
 Route::post('login', [LoginController::class, 'login'])->name('login');
+
+Route::apiResource('users', UserController::class);
 
 Route::get('usuarios/{usuario}/postagens', [UsuarioController::class, 'listPostagens'])
         ->name('usuarios.postagens');
