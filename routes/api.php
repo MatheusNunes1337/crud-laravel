@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -28,7 +29,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('grupos', GrupoController::class);
     Route::apiResource('postagens', PostagemController::class);
     Route::post('grupos', [GrupoController::class, 'store'])->middleware(['ability:is-admin']);
-    Route::put('grupos/{id}', [GrupoController::class, 'update'])->middleware(['ability:is-admin']);
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });
 

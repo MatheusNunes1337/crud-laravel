@@ -62,3 +62,156 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## Documentação da API
+
+#### Retorna todos os usuários
+
+```http
+  GET /usuarios
+```
+#### Retorna um usuário
+
+```http
+  GET /usuarios/${usuario}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `usuario`      | `string` | **Obrigatório**. O ID do usuário que você quer achar|
+
+#### Retorna todas as postagens feitas por um usuário
+
+```http
+  GET /usuarios/${usuario}/postagens
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `grupo`      | `string` | **Obrigatório**. O ID do grupo que você quer achar|
+
+#### Cria um novo usuário
+
+```http
+  POST /usuarios/
+```
+
+#### Atualiza um usuário
+
+```http
+  PUT /usuarios/${usuario}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `usuario`      | `string` | **Obrigatório**. O ID do usuário que você quer atualizar |
+
+#### Deleta um usuário
+
+```http
+  DELETE /usuarios/${usuario}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `usuario`      | `string` | **Obrigatório**. O ID do usuário que você quer deletar|
+
+
+#### Retorna todos os grupos
+
+```http
+  GET /grupos
+```
+#### Retorna um grupo
+
+```http
+  GET /grupos/${grupo}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `grupo`      | `string` | **Obrigatório**. O ID do grupo que você quer achar|
+
+#### Retorna todas as postagens de um grupo
+
+```http
+  GET /grupos/${grupo}/postagens
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `grupo`      | `string` | **Obrigatório**. O ID do grupo que você quer achar|
+
+#### Cria um novo grupo
+
+```http
+  POST /grupos/
+```
+
+#### Atualiza um usuário
+
+```http
+  PUT /grupos/${grupo}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `grupo`      | `string` | **Obrigatório**. O ID do grupo que você quer atualizar |
+
+#### Deleta um grupo
+
+```http
+  DELETE /grupos/${grupo}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `grupo`      | `string` | **Obrigatório**. O ID do grupo que você quer deletar|
+
+
+#### Retorna todas as postagens
+
+```http
+  GET /postagens
+```
+#### Retorna uma postagem
+
+```http
+  GET /postagens/${postagem}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `postagem`      | `string` | **Obrigatório**. O ID da postagem que você quer achar|
+
+#### Cria uma nova postagem
+
+```http
+  POST /postagens/
+```
+
+#### Atualiza uma postagem
+
+```http
+  PUT /postagens/${postagem}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `postagem`      | `string` | **Obrigatório**. O ID da postagem que você quer atualizar |
+
+#### Deleta uma postagem
+
+```http
+  DELETE /postagens/${postagem}
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `postagem`      | `string` | **Obrigatório**. O ID da postagem que você quer deletar|
+
+
+
+
+

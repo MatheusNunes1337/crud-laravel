@@ -40,9 +40,6 @@ class PostagemController extends Controller
     public function store(Request $request)
     {
         try{
-            if(!$request->user()->tokenCan('is_admin')) {
-                throw new Exception('Você não está autorizado a criar um grupo');
-            }
             return response()->json([
                 "Message"=>"Postagem criada com sucesso!",
                 "Postagem"=>$this->postagem->create($request->post())
